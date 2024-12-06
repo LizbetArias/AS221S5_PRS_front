@@ -1,0 +1,100 @@
+<div class="report">
+    <div class="report_titulo">Reportes Trimestales</div>
+    <br>
+    <div class="linea" style="display: flex; justify-content: space-between;">
+        <div class="row g-3" style="width: 100%; display: flex; gap: 10px;">
+            <div class="col-md-4">
+                <div class="form-floating">
+                    <select class="form-select" id="selectTrimester" (change)="onFilterChange()">
+                        <option value="Enero-Marzo">Enero-Marzo</option>
+                        <option value="Abril-Junio">Abril-Junio</option>
+                        <option value="Julio-Septiembre">Julio-Septiembre</option>
+                        <option value="Octubre-Diciembre">Octubre-Diciembre</option>
+                    </select>
+                    <label for="selectTrimester">Selecciona un Trimestre</label>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-floating">
+                    <select class="form-select" id="selectStatus" (change)="onFilterChange()">
+                        <option value="A">Activos</option>
+                        <option value="I">Inactivos</option>
+                    </select>
+                    <label for="selectStatus">Selecciona un Estado</label>
+                </div>
+            </div>
+            <div class="col">
+                <button class="btn btn-primary me-md-0" type="button"
+                    style="margin: auto; display: flex; gap: 10px; align-items: center; justify-content: center;"
+                    data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                    <i class='bi bi-plus-circle' style="font-size: 22px;"></i>Nuevo
+                </button>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="enc_list" style="display: flex; justify-content: space-between; align-items: center;">
+        <div class="trimestre">Listado del Trimestre</div>
+        <div class="form-floating"
+            style="width: auto; height: auto; display: flex; align-items: center; gap: 10px; margin-right: 10px;">
+            <h6>Buscar Año:</h6>
+            <input type="number" style="width: 100px; height: 2.5rem; border-radius: 0.5rem; padding: 15px;"
+                (input)="onYearSearch($event)" placeholder="Año" [value]="searchYear">
+        </div>
+    </div>
+
+    <!-- Spinner de carga -->
+    <div class="d-flex align-items-center" *ngIf="loading" style="margin-left: 10px; margin-top: 20px;">
+        <strong role="status">Loading...</strong>
+        <div class="spinner-border ms-auto" aria-hidden="true"></div>
+    </div>
+
+    <!-- Tabla con reportes -->
+    <div *ngIf="!loading" class="container mt-4">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Año</th>
+                    <th>Descripción</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let data of filteredReports">
+                    <td>{{ data.report.id }}</td>
+                    <td>{{ data.report.year }}</td>
+                    <td>{{ data.report.description }}</td>
+                    <td>
+                        <div class="acciones"
+                            style="display: flex; gap: 10px; justify-content: center; align-items: center;">
+
+                            <!-- Botones condicionados al estado -->
+                            <button class="btn btn-primary btn-sm" *ngIf="data.report.active === 'A'"
+                                (click)="editReport(data.report.id)">
+                                <i class="bi bi-pencil-square" style="color: #ffffff;"></i> Editar
+                            </button>
+
+                            <button class="btn btn-danger btn-sm" *ngIf="data.report.active === 'A'"
+                                (click)="delete(data.report.id)">
+                                <i class="bi bi-trash-fill" style="color: #ffffff;"></i> Eliminar
+                            </button>
+
+                            <button class="btn btn-success btn-sm" *ngIf="data.report.active === 'I'"
+                                (click)="restore(data.report.id)">
+                                <i class="bi bi-clock-history" style="color: #ffffff;"></i> Restaurar
+                            </button>
+
+                            <button class="btn btn-secondary btn-sm" *ngIf="data.report.active === 'A'"
+                                (click)="pdfReport(data.report.id)">
+                                <i class="bi bi-filetype-pdf" style="color: #ffffff;"></i> PDF
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<app-report-modal (reportSaved)="onReportSaved()"></app-report-modal>

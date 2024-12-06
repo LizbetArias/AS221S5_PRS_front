@@ -1,0 +1,86 @@
+<div class="dashboard-container mx-auto my-8 p-4 bg-gray-100">
+  <h1 class="text-4xl font-bold mb-6 text-center">Dashboard de Maestros</h1>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+
+    <div class="card">
+      <div class="icon-container mb-4">
+        <i class="fas fa-truck text-5xl text-blue-500"></i>
+      </div>
+      <h2 class="text-2xl font-semibold mb-2">Asistencias</h2>
+      <p class="text-gray-700 text-xl mb-4">(17)</p>
+      <button class="action-button">Prototipar en Figma</button>
+    </div>
+
+    <div class="card">
+      <div class="icon-container mb-4">
+        <i class="fas fa-warehouse text-5xl text-blue-500"></i>
+      </div>
+      <h2 class="text-2xl font-semibold mb-2">Reportes</h2>
+      <p class="text-gray-700 text-xl mb-4">(05)</p>
+      <button class="action-button">Prototipar en Figma</button>
+    </div>
+
+    <div class="card">
+      <div class="icon-container mb-4">
+        <i class="fas fa-seedling text-5xl text-blue-500"></i>
+      </div>
+      <h2 class="text-2xl font-semibold mb-2">Personas</h2>
+      <p class="text-gray-700 text-xl mb-4">(13)</p>
+      <button class="action-button">Prototipar en Figma</button>
+    </div>
+
+    <div class="card">
+      <div class="icon-container mb-4">
+        <i class="fas fa-syringe text-5xl text-blue-500"></i>
+      </div>
+      <h2 class="text-2xl font-semibold mb-2">Familia</h2>
+      <p class="text-gray-700 text-xl mb-4">(08)</p>
+      <button class="action-button">Prototipar en Figma</button>
+    </div>
+
+<style>
+  .dashboard-container {
+    max-width: 80rem;
+    background-color: #f0f4f8;
+    border-radius: 0.5rem;
+  }
+
+  .card {
+    background: white;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  }
+
+  .icon-container i {
+    transition: color 0.2s;
+  }
+
+  .card:hover .icon-container i {
+    color: #2563eb; /* Color azul más oscuro en hover */
+  }
+
+  h1 {
+    color: #1e3a8a;
+  }
+
+  .action-button {
+    background-color: #2563eb;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    transition: background-color 0.2s ease-in-out;
+  }
+
+  .action-button:hover {
+    background-color: #1d4ed8; /* Color azul más oscuro en hover */
+  }
+</style>

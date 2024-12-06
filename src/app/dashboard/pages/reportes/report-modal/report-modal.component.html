@@ -1,0 +1,100 @@
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true" (shown.bs.modal)="onModalShown()">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">{{ modalTitle }}</h5>
+                <button type="button" class="btn-close close-form" data-bs-dismiss="modal" aria-label="Close"
+                    (click)="reiniciarValidacion()"></button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="reporteForm" class="was-validated">
+                    <!-- Información general -->
+                    <div class="mb-3">
+                        <label for="trimestre" class="form-label">Selecciona Un Trimestre</label>
+                        <select class="form-select" id="trimestre" formControlName="trimestre" required>
+                            <option selected disabled value="">Selecciona un Trimestre</option>
+                            <option *ngFor="let trimestre of trimestres" [value]="trimestre">{{ trimestre }}</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="year" class="form-label">Año</label>
+                        <input type="number" class="form-control" id="year" formControlName="year" required>
+                        <div *ngIf="reporteForm.get('year')?.invalid && reporteForm.get('year')?.touched"
+                            class="text-danger">
+                            El año es obligatorio y debe ser un número válido.
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="descripcion" class="form-label">Descripción</label>
+                        <textarea class="form-control" id="descripcion" formControlName="descripcion" rows="2"
+                            required></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="cronograma" class="form-label">Cronograma (Opcional)</label>
+                        <input type="file" class="form-control" id="cronograma" (change)="validarCronograma($event)">
+                        <div class="invalid-feedback" *ngIf="cronogramaError">{{ cronogramaError }}</div>
+
+                        <!-- Mostrar nombre de la imagen y el ícono -->
+                        <div *ngIf="cronograma" class="mt-2 d-flex align-items-center">
+                            <span class="badge bg-success me-1">{{ cronograma.name }} <button type="button"
+                                    class="btn btn-succes fw-bold text-light" (click)="verCronograma()">
+                                    <i class="bi bi-eye"></i> Ver
+                                </button></span>
+                        </div>
+                    </div>
+
+                    <!-- Lista dinámica de talleres -->
+                    <div class="talleres-sections">
+                        <div *ngFor="let taller of talleres.controls; let i = index" class="card mb-3">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <span>Taller {{ i + 1 }}</span>
+                                <button type="button" class="btn btn-danger btn-sm"
+                                    (click)="eliminarTaller(i)">Eliminar</button>
+                            </div>
+                            <div class="card-body" [formGroup]="getTallerFormGroup(i)">
+                                <div class="mb-3">
+                                    <label for="nombreTaller{{ i }}" class="form-label">Nombre del Taller</label>
+                                    <input type="text" class="form-control" id="nombreTaller{{ i }}"
+                                        formControlName="nombre" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="descripcionTaller{{ i }}" class="form-label">Descripción
+                                        (Opcional)</label>
+                                    <textarea class="form-control" id="descripcionTaller{{ i }}"
+                                        formControlName="descripcion" rows="2"></textarea>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Imágenes</label>
+                                    <input type="file" class="form-control" (change)="cargarImagenes($event, i)"
+                                        multiple required>
+                                </div>
+                                <div class="mt-2">
+                                    <span *ngFor="let img of imagenesTalleres[i]; let j = index"
+                                        class="badge bg-secondary me-1 mb-2">
+                                        {{ 'Imagen ' + (j + 1) }}
+                                        <button type="button" class="btn btn-secondary btn-sm fw-bold"
+                                            (click)="verImagenTaller(img)">
+                                            <i class="bi bi-eye"></i> Ver
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-end mt-3">
+                        <button type="button" class="btn btn-primary" (click)="agregarTaller()">Agregar Taller</button>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                    (click)="reiniciarValidacion()">Cerrar</button>
+                <button type="button" class="btn btn-primary" (click)="guardarReporte()">
+                    {{ isEditMode ? 'Editando' : 'Guardar' }}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

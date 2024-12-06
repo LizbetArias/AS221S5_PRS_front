@@ -1,0 +1,111 @@
+.report {
+    margin: 20px 10px;
+
+}
+.report .report_titulo{
+    display: flex;
+    justify-content: center;
+    font-weight: bolder;
+    font-size: 20px;
+}
+
+.trimestre {
+    font-size: 18px;
+    font-weight: 500;
+    margin-left: 10px;
+}
+
+.report .h3 span::after {
+    content: '';
+    display: block;
+    width: 100px;
+    height: 2px;
+    position: relative;
+    top: 4px;
+    background-color: #007bff;
+    margin: 0 auto;
+}
+
+.linea {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+/*Table*/
+.tabla {
+    width: 100%;
+    background: red;
+}
+
+.centered {
+    text-align: center !important;
+    vertical-align: middle !important;
+}
+
+th,
+td {
+    border-bottom: 1px solid var(--text_color) !important;
+}
+
+
+
+.modo {
+    color: var(--text_color);
+}
+
+.table th,
+.table td {
+    text-align: center;
+}
+
+.loading {
+    color: var(--text_color);
+}
+
+.descarga-icons {
+    display: flex;
+    gap: 10px;
+    /* Espacio entre los iconos */
+}
+
+.icono-descarga {
+    width: 40px;
+    /* Ancho del icono */
+    height: auto;
+    /* Mantiene la proporción */
+}
+
+.modal-header {
+    background: #0b68ad;
+    color: #ebebeb;
+}
+
+.btn-close.white {
+    filter: brightness(0) invert(1);
+}
+
+#nuevoReporteModal .btn-close {
+    filter: brightness(0) invert(1);
+}
+
+/* Flexbox para alinear el nombre de la imagen a la izquierda y el botón "Eliminar" a la derecha */
+.lista-item-imagen {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.lista-item-imagen button {
+    margin-left: auto;
+    /* Empuja el botón hacia la derecha */
+}
+
+#previsualizacionImagenes img {
+    max-height: 150px;
+    margin: 10px;
+    border: 1px solid #202020;
+    border-radius: 5px;
+}

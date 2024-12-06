@@ -1,0 +1,20 @@
+.modal-header {
+    background: #0b68ad;
+    color: #ebebeb;
+    font-weight: bold;
+}
+
+.btn-close.white {
+    filter: brightness(0) invert(1);
+}
+
+#nuevoReporteModal .btn-close {
+    filter: brightness(0) invert(1);
+}
+
+.modal-body {
+    max-height: 65vh;
+    /* Ajusta el valor según lo necesites */
+    overflow-y: auto;
+    /* Permite el desplazamiento vertical */
+}
