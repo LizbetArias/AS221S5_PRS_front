@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  prs-backend: 
+    image: lizbet/prs1back
+    container_name: prs-backend # Asigné un nombre de contenedor único para el backend
+    environment:
+      - DATABASE_URL=r2dbc:postgresql://ep-aged-lake-a4wjkmtd-pooler.us-east-1.aws.neon.tech/neondb?sslmode=require
+      - DATABASE_USERNAME=neondb_owner
+      - DATABASE_PASSWORD=GQaLu2oDSTR6
+    ports:
+      - "8080:8080"
+    networks:
+      - prs-network
+
+  prs-frontend:
+    image: lizbet/prs1front
+    container_name: prs-front
+    ports:
+      - "4200:4200" # Puerto expuesto para el frontend
+    depends_on:
+      - prs-backend # Cambié el nombre del backend en la dependencia
+    networks:
+      - prs-network
+
+networks:
+  prs-network: # Renombré la red a "prs-network"
+    driver: bridge
+
+# docker build -t lizbet/prs1front .
+# docker push lizbet/prs1front
